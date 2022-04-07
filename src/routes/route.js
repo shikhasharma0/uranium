@@ -1,5 +1,5 @@
 const express = require('express');
-const console = require('../logger/logger');
+const loggerfix = require('../logger/logger');
 const Helper = require('../util/helper');
 const Formatter = require('../validater/formattar');
 const lodash = require('lodash');
@@ -8,6 +8,7 @@ const router = express.Router();
 
 router.get('/test-me', function (req, res) {
     console.log('Welcome to my application. I am <Shikha Sharma> and a part of FunctionUp Uraninam cohort.')
+    loggerfix.endpoint()
     Helper.printDate()
     Helper.printMonth()
     Helper.getBatchInfo()
