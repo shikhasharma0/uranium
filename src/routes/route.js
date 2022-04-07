@@ -1,7 +1,7 @@
 const express = require('express');
 const console = require('../logger/logger');
 const Helper = require('../util/helper');
-const Formatter = require('../validator/formatter');
+const Formatter = require('../validater/formattar');
 const lodash = require('lodash');
 const router = express.Router();
 
