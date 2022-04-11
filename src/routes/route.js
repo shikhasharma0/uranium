@@ -1,70 +1,72 @@
 const express = require('express');
-
 const router = express.Router();
+ 
+let players =
+   [
+       {
+           name: "manish",
+           dob: "1/1/1995",
+           gender: "male",
+           city: "jalandhar",
+           sports: [
+               "swimming"
+           ]
+       },
+       {
+           name: "gopal",
+           dob: "1/09/1995",
+           gender: "male",
+           city: "delhi",
+           sports: [
+               "soccer"
+           ],
+       },
+       {
+           name: "lokesh",
+           dob: "1/1/1990",
+           gender: "male",
+           city: "mumbai",
+           sports: [
+               "soccer"
+           ],
+       },
+   ]
+ 
+   router.post('/players', function (req, res) {
+ 
+       //LOGIC WILL COME HERE
+      let data = req.body.players
+    for( let i=0; i<length.players; i++);
+    if (req.body.name == data[i].name) {
+        retrun = true;
+        res.send("already user exists")
+        break;
+    }
+}
 
-router.get('/test-me', function (req, res) {
-    // let a = { msg: "My first ever API response in JSON !!"} 
+if (retrun == false) {
+    let obj = {
+        nmae: req.body.name,
+        dob: req.body.dob,
+        gender: req.body.gender,
+        city: req.body.city,
+        sports: [req.body.sports]
+    }
+    data.push(obj);
+    res.send({ data: players, status: true })
+}
 
-
-    res.send( { msg: "My first ever API response in JSON !!"} )
+else
+res.send("insert all valid details")
 });
 
 
 
-router.get('/test-api1', function (req, res) {
 
-    res.send( "hi FunctionUp " )
-});
-
-
-router.get('/test-api2', function (req, res) {
-
-    res.send( { msg: "Hi FUnctionUp..again !"} )
-});
-
-
-router.get('/test-api3', function (req, res) {
-
-    res.send( { msg: "Hi FUnctionUp..again..this is another similar api !"} )
-});
-
-
-router.get('/test-api4', function (req, res) {
-
-    res.send( { msg: "Hi FUnctionUp..again..this is another similar api ..not I am getting bored!"} )
-});
-
-
-router.get('/test-api5', function (req, res) {
-
-    res.send( { msg: "Hi FUnctionUp" , name:"FunctionUp", age: "100"} )
-});
-
-
-
-router.get('/test-api6', function (req, res) {
-
-    res.send( {   data: [12, 24, 36, 48, 60]  }   )
-});
-
-router.post('/test-post1', function (req, res) {
-
-    res.send( {  msg: "hi guys"  }   )
-});
-
-
-// to send data in  post request-> prefer sending in BODY -> click body-raw-json
-router.post('/test-post2', function (req, res) {
-    let data= req.body
-    console.log(data)
-    res.send( {  msg: "hi guys..my 2nd post req"  }   )
-});
-
-
-const randomController= require("../controllers/randomController.js")
-//write a post request to accept an element in post request body and add it to the given array and return the new array
-router.post('/test-post3', randomController.addToArray ); //HANDLER/CONTROLLER
-
-
+//    router.post('/test-post2', function (req, res) {
+//     let data= req.body
+//     console.log(data)
+//     res.send( {  msg: "hi guys..my 2nd post req"  }   )
+// });
 
 module.exports = router;
