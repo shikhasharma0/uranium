@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-// const UserModel= require("../models/userModel.js")
+ const AuthorModel = require("../models/authorModel.js")
 const UserController= require("../controllers/userController")
 const BookController= require("../controllers/bookController")
 const AuthorController= require("../controllers/authorController")
