@@ -1,6 +1,11 @@
 const jwt = require("jsonwebtoken");
 const userModel = require("../models/userModel");
 
+
+
+//- Write a **POST api /users** to register a user from the user details in request body.
+
+
 const createUser = async function (abcd, xyz) {
   //You can name the req, res objects anything.
   //but the first parameter is always the request 
@@ -10,6 +15,10 @@ const createUser = async function (abcd, xyz) {
   console.log(abcd.newAtribute);
   xyz.send({ msg: savedData });
 };
+
+
+//Write a ***POST api /login** to login a user that takes user details - email and password
+ //from the request body. If the credentials don't match with any user's data return a suitable error.
 
 const loginUser = async function (req, res) {
   let userName = req.body.emailId;
@@ -31,7 +40,7 @@ const loginUser = async function (req, res) {
   let token = jwt.sign(
     {
       userId: user._id.toString(),
-      batch: "thorium",
+      batch: "uranium",
       organisation: "FUnctionUp",
     },
     "functionup-thorium"
@@ -39,9 +48,11 @@ const loginUser = async function (req, res) {
   res.setHeader("x-auth-token", token);
   res.send({ status: true, data: token });
 };
+// Write a **GET api /users/:userId** to fetch user details. Pass the userId as path param in the url. 
+//Check that request must contain **x-auth-token** header. If absent, return a suitable error.
 
 const getUserData = async function (req, res) {
-  let token = req.headers["x-Auth-token"];
+  let token = req.headers["x-auth-token"];
   if (!token) token = req.headers["x-auth-token"];
 
   //If no token is present in the request header return error
@@ -65,6 +76,9 @@ const getUserData = async function (req, res) {
 
   res.send({ status: true, data: userDetails });
 };
+///- Write a **PUT api /users/:userId** to update user details. Pass the userId as path param 
+//in the url and update the attributes received in the request body. 
+//Check that request must contain **x-auth-token** header. If absent, return a suitable error.
 
 const updateUser = async function (req, res) {
 // Do the same steps here:
@@ -80,11 +94,34 @@ const updateUser = async function (req, res) {
   }
 
   let userData = req.body;
-  let updatedUser = await userModel.findOneAndUpdate({ _id: userId }, userData);
+  let updatedUser = await userModel.findOneAndUpdate({ _id: userId }, userData , {new: true});
   res.send({ status: updatedUser, data: updatedUser });
 };
+
+
+// Write a **DELETE api /users/:userId** that takes the userId in the path params and marks the isDeleted attribute for a 
+//user as true. Check that request must contain **x-auth-token** header. If absent, return a suitable error.
+
+const deleteUser = async function (req, res) {
+  
+  let userId = req.params.userId;
+  let user = await userModel.findById(userId);
+  //Return an error if no user with the given id exists in the db
+  if (!user) {
+    return res.send("No such user exists");
+  }
+
+  
+  let updatedUser = await userModel.findOneAndUpdate({ _id: userId }, {isDeleted:  true}, {new: true});
+  res.send({ status: updatedUser, data: deleteUser });
+};
+
+
+
+
 
 module.exports.createUser = createUser;
 module.exports.getUserData = getUserData;
 module.exports.updateUser = updateUser;
 module.exports.loginUser = loginUser;
+module.exports.deleteUser = deleteUser;
