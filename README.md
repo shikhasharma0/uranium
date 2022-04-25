@@ -8,7 +8,7 @@
 - For this assignment you have to create a new branch - **assignment/auth-3**
 - Your user document should look like this
 ```
- 	{
+ 	{ 
     "_id" : ObjectId("6226e3d2b98f22b349ca58be"),
     "firstName" : "Sabiha",
     "lastName" : "Khan",
@@ -39,4 +39,7 @@ If present, check that the token is valid.
 + Please note that you have to also write the logic for authorisation so that a logged in user can only modify or fetch their own data.
 
 ``` 
+
+
+
 
